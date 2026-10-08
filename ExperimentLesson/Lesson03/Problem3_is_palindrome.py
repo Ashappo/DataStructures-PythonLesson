@@ -17,6 +17,8 @@ class DLinkList:
 测试用例：
 5
 1 2 3 2 1
+期望输出：
+1
 '''
 # 此处为学生编写代码嵌入点位
 # 设计函数 is_palindrome

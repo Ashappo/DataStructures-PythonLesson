@@ -17,6 +17,8 @@ class DLinkList:
 测试用例：
 8
 1 2 1 3 2 1 5 3
+期望输出：
+1 2 3 5
 '''
 # 此处为学生编写代码嵌入点位
 #设计函数 remove_duplicates

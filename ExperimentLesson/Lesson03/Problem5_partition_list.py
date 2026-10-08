@@ -21,6 +21,8 @@ class CDLinkList:
 测试用例：
 6 5
 5 3 8 1 9 4
+期望输出：
+3 1 4 5 8 9
 '''
 # 此处为学生编写代码嵌入点位
 # 设计函数 partition_list
