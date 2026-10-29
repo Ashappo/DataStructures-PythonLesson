@@ -28,6 +28,8 @@ class CircQueue:
     @code         调用示例：
           en_queue(q, '5')              # 把字符 '5' 入队
 '''
+#front：队首指针，指向队列当前队首元素的前一个位置
+#rear：队尾指针，指向队列最后存放元素的位置
 #设计函数 en_queue
 def en_queue(q, e):
 # 队满时入队失败（牺牲一个单元区分队空与队满）
