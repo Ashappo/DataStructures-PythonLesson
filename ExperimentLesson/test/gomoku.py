@@ -48,7 +48,7 @@ class Gomoku(object):
     def __init__(self, root):
         self.root = root
         self.root.title("双人五子棋")
-        self.root.geometry("700x720")     # 画布 620×620 + 顶部标签 + 底部按钮
+        self.root.geometry("700x740")     # 画布 620×620 + 顶部标签 + 底部按钮
         self.root.resizable(False, False)
 
         self.board = [[0] * GRID for _ in range(GRID)]   # 0 空 1 黑 2 白
@@ -95,9 +95,10 @@ class Gomoku(object):
 
         bottom = tk.Frame(self.root)
         bottom.pack(pady=10)
-        tk.Button(bottom, text="悔棋", width=12,
+        # 按钮加高、字体加大：避免中文显示不全、按钮太扁不好点
+        tk.Button(bottom, text="悔棋", width=12, font=(UI_FONT, 11), pady=6,
                   command=self.undo).pack(side=tk.LEFT, padx=12)
-        tk.Button(bottom, text="重置对局", width=12,
+        tk.Button(bottom, text="重置对局", width=12, font=(UI_FONT, 11), pady=6,
                   command=self.reset).pack(side=tk.LEFT, padx=12)
 
     def _draw_board(self):
