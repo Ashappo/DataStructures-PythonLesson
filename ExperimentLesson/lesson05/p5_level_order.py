@@ -105,40 +105,49 @@ from collections import deque           # 引入双端队列模块，作普通�
 # 此处为学生编写代码嵌入点位
 # 设计函数 LevelOrder、DispLevel
 
-#设计函数 LevelOrder
-def LevelOrder(bt):                     # 层次遍历的算法
-    qu = deque()                        # 将双端队列作为普通队列 qu
-    qu.append(bt.b)                     # 根结点进队
-    while len(qu) > 0:                  # 队不空循环
-        p = qu.popleft()                # 出队一个结点 p
-        print(p.data, end=' ')          # 访问 p 结点（值之间用空格分隔）
-        if p.lchild != None:            # 有左孩子时将其进队
+# 普通层次遍历：所有结点输出在一行
+def LevelOrder(bt):
+    if bt.b is None:
+        return
+    qu = deque()
+    qu.append(bt.b)                # 根结点入队
+    while len(qu) > 0:             # 队列不为空循环
+        p = qu.popleft()           # 队头结点出队
+        print(p.data, end=' ')     # 访问该结点
+        if p.lchild is not None:   # 如果有左孩子，左孩子入队
             qu.append(p.lchild)
-        if p.rchild != None:            # 有右孩子时将其进队
+        if p.rchild is not None:   # 如果有右孩子，右孩子入队
             qu.append(p.rchild)
-    print()                             # 一行输出完毕，换行
+    print()                        # 遍历完成，换行
 
-#设计函数 DispLevel
-def DispLevel(bt):                      # 按层分行输出二叉树
-    qu = deque()                        # 将双端队列作为普通队列 qu
-    curl = 1                            # 当前层号，根结点为第 1 层
-    last = bt.b                         # last 记录本层最右边的结点（初始为根）
-    qu.append(bt.b)                     # 根结点进队
-    print('%d:' % curl, end='')         # 先输出第 1 层的层号 "1:"（不换行）
-    while len(qu) > 0:                  # 队不空循环
-        p = qu.popleft()                # 出队一个结点 p
-        print(' ' + p.data, end='')     # 输出本层结点值（前导空格构成 "值 值 值" 格式）
-        if p.lchild != None:            # 有左孩子时将其进队
+# 按层分行输出二叉树，带层号
+def DispLevel(bt):
+    if bt.b is None:
+        return
+    qu = deque()                   # 创建队列
+    curl = 1                       # 当前层号，根为第 1 层
+    last = bt.b                    # last：标记本层最右侧结点
+    qu.append(bt.b)                # 根结点入队
+    # print('%d:' % curl, end='')
+    print(f"{curl}:", end="")      # 先输出第一层的层号，不换行
+    while len(qu) > 0:             # 队列非空
+        p = qu.popleft()           # 队头结点出队
+        print(' ' + p.data, end='')# 输出结点数据，前面带空格
+        # 左孩子存在则入队
+        if p.lchild is not None:
             qu.append(p.lchild)
-        if p.rchild != None:            # 有右孩子时将其进队
+        # 右孩子存在则入队
+        if p.rchild is not None:
             qu.append(p.rchild)
-        if p is last:                   # 出队结点恰为本层最右结点 => 本层处理完毕
-            if len(qu) > 0:             # 队中还有结点，说明还有下一层
-                print()                 # 本层结束，换行
-                curl += 1               # 层号加 1，进入下一层
-                print('%d:' % curl, end='')  # 输出下一层的层号 "k:"
-                last = qu[-1]           # 队尾元素即下一层最后进队的结点 = 下一层最右结点
-    print()                             # 最后一层输出完毕，换行
+        # 判断：刚出队的结点是不是本层最右结点
+        if p is last:
+            if len(qu) > 0:         # 队列还有结点，说明存在下一层
+                print()            # 当前层输出完毕，换行
+                curl += 1          # 层号 +1
+                print(f"{curl}:", end="")  # 打印新一层层号
+                last = qu[ len(qu) - 1 ]
+                # last = qu[-1]      # qu[-1]：下一层最后入队结点，即下一层最右
+    print()                        # 最后一层结束后换行
 
 if __name__ == '__main__':
     s = input().strip()                 # 括号表示法串
